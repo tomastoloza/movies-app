@@ -14,13 +14,16 @@ const Movie = ({movie}) => {
     const [cargando, guardarCargando] = useState(false);
 
     const getMoviePlot = async (id) => {
-        guardarCargando(true)
-        setTimeout(async () => {
-            let promise = await fetchMoviePlot(id).then(r => r);
-            let text = promise.plots[0].text
-            setMoviePlot(text);
-            guardarCargando(false);
-        });
+        if (!toggle) {
+            guardarCargando(true)
+            setTimeout(async () => {
+                let promise = await fetchMoviePlot(id).then(r => r);
+                let text = promise.plots[0].text
+                setMoviePlot(text);
+                guardarCargando(false);
+            });
+
+        }
     }
 
     let details = <div className={"mx-2"}>
