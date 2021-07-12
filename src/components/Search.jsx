@@ -11,7 +11,7 @@ const Search = ({searchMovies, setSearchMovies}) => {
     const fetchSearch = async (event) => {
         event.preventDefault();
         if (searchTerm !== "") {
-            guardarCargando(true)
+            guardarCargando(true);
             setTimeout(async () => {
                 let movies = await fetchMoviesBySearch(searchTerm).then(r => r);
                 console.log(movies.results)

@@ -1,15 +1,10 @@
 import React from 'react';
-import './Spiner.css';
 
 const Spinner = () => {
     return (
-        <div className="sk-chase">
-            <div className="sk-chase-dot"/>
-            <div className="sk-chase-dot"/>
-            <div className="sk-chase-dot"/>
-            <div className="sk-chase-dot"/>
-            <div className="sk-chase-dot"/>
-            <div className="sk-chase-dot"/>
+        <div>
+            <img className={"animate-spin h-10 w-10 mx-auto"}
+                 src={"https://img.icons8.com/material-outlined/24/ffffff/spinner-frame-4.png"} alt="Loading"/>
         </div>
     );
 }

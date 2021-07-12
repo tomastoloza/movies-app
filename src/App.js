@@ -7,18 +7,6 @@ import {fetchTopRatedMovies} from "./requests";
 
 function App() {
     const [search, setSearch] = useState([]);
-    const [topRated, setTopRated] = useState([]);
-
-    // useEffect(() => {
-    //     async function topRated() {
-    //         return fetchTopRatedMovies();
-    //     }
-    //
-    //     topRated().then(value => {
-    //         setTopRated(value);
-    //     });
-    // }, []);
-
 
     return (
         <div className="App">
