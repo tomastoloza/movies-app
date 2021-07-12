@@ -1,6 +1,5 @@
 const apiKey = "6e87333b06msh0c2cc5644d8db4dp1e85abjsnb6f0d82e72f0";
 
-
 const fetchApi = async (endpoint) => {
     let api = await fetch(endpoint, {
         "method": "GET",
@@ -8,31 +7,35 @@ const fetchApi = async (endpoint) => {
             "x-rapidapi-key": apiKey,
             "x-rapidapi-host": "imdb8.p.rapidapi.com"
         }
+    }).then(response => {
+        return response.json();
+    }).catch(response => {
+        console.log(response)
     });
+    console.log(api);
     console.log("API Response: ", api.status, api.statusText)
-    return api.json();
+    return api;
 }
 
 const fetchTopRatedMovies = () => {
     return fetchApi('https://imdb8.p.rapidapi.com/title/get-top-rated-movies');
 }
 
-const fetchMovieById = (id) => {
+const fetchDetails = (id) => {
     //tconst=tt0944947
     return fetchApi(`https://imdb8.p.rapidapi.com/title/get-details?tconst=${id}`);
 }
 
 //TODO: Store movies by id in localstorage
 const fetchMoviesBySearch = (title) => {
-    let api = fetchApi(`https://imdb8.p.rapidapi.com/title/find?q=${title}`);
-    return api
-        .then(response => {
-            return response
-        })
-        .catch(response => {
-            console.log(response)
-        });
+    return fetchApi(`https://imdb8.p.rapidapi.com/title/find?q=${title}`);
 }
 
-exports.fetchMoviesBySearch = fetchMoviesBySearch
-exports.fetchTopRatedMovies = fetchTopRatedMovies
+const fetchMoviePlot = (id) => {
+    return fetchApi(`https://imdb8.p.rapidapi.com/title/get-plots?tconst=${id}`);
+}
+
+exports.fetchMoviesBySearch = fetchMoviesBySearch;
+exports.fetchTopRatedMovies = fetchTopRatedMovies;
+exports.fetchDetails = fetchDetails;
+exports.fetchMoviePlot = fetchMoviePlot;
