@@ -16,15 +16,6 @@ const fetchApi = async (endpoint) => {
     return api;
 }
 
-const fetchTopRatedMovies = () => {
-    return fetchApi('https://imdb8.p.rapidapi.com/title/get-top-rated-movies');
-}
-
-const fetchDetails = (id) => {
-    //tconst=tt0944947
-    return fetchApi(`https://imdb8.p.rapidapi.com/title/get-details?tconst=${id}`);
-}
-
 //TODO: Store movies by id in localstorage
 const fetchMoviesBySearch = (title) => {
     return fetchApi(`https://imdb8.p.rapidapi.com/title/find?q=${title}`);
