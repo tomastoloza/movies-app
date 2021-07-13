@@ -12,7 +12,6 @@ const fetchApi = async (endpoint) => {
     }).catch(response => {
         console.log(response)
     });
-    console.log(api);
     console.log("API Response: ", api.status, api.statusText)
     return api;
 }
@@ -35,7 +34,9 @@ const fetchMoviePlot = (id) => {
     return fetchApi(`https://imdb8.p.rapidapi.com/title/get-plots?tconst=${id}`);
 }
 
-exports.fetchMoviesBySearch = fetchMoviesBySearch;
-exports.fetchTopRatedMovies = fetchTopRatedMovies;
-exports.fetchDetails = fetchDetails;
-exports.fetchMoviePlot = fetchMoviePlot;
+module.exports = {
+    fetchMoviesBySearch: fetchMoviesBySearch,
+    // fetchTopRatedMovies: fetchTopRatedMovies,
+    // fetchDetails: fetchDetails,
+    fetchMoviePlot: fetchMoviePlot
+};

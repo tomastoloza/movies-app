@@ -1,8 +1,7 @@
-import React, {useEffect, useState} from 'react';
-import {fetchMoviesBySearch} from "../requests";
-import Movie from "./Movie";
+import React, {useState} from 'react';
 import Section from "./Section";
 import Spinner from "./Spinner";
+const {fetchMoviesBySearch} = require("../requests")
 
 const Search = ({searchMovies, setSearchMovies}) => {
     const [searchTerm, setSearchTerm] = useState("");
@@ -26,21 +25,21 @@ const Search = ({searchMovies, setSearchMovies}) => {
     };
 
     return (
-        <div className={"m-2"}>
-            <p className={"text-xl font-bold m-2 text-white"}>Search movies</p>
+        <div className={""}>
+            <p className={"text-xl font-bold m-6 text-white"}>Search movies</p>
             <form onSubmit={fetchSearch}>
                 <input type="search" placeholder={"Search"}
-                       className="border-2 focus:outline-none p-2 rounded-l-lg bg-gray-300 border-gray-500 w-1/2"
+                       className="text-white border-2 focus:outline-none p-2 rounded-l-lg bg-gray-700 border-gray-300 w-1/2"
                        value={searchTerm}
                        onChange={handleChange}/>
                 <button type="submit"
-                        className="border-2 focus:outline-none p-2 rounded-r-lg bg-yellow-500 border-gray-500 font-bold">
+                        className="border-2 hover:bg-yellow-500 focus:outline-none p-2 rounded-r-lg bg-yellow-400 border-gray-300 font-bold">
                     Search
                 </button>
             </form>
             <div className={"m-4"}>
                 {cargando ? <Spinner/> : null}
-                {!cargando && searchMovies && <Section movies={searchMovies}/> ||
+                {(!cargando && searchMovies && <Section movies={searchMovies}/>) ||
                 <p className={"text-white"}>No results found for your search</p>}
             </div>
         </div>
