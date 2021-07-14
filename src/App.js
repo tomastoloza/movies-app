@@ -9,6 +9,7 @@ function App() {
     return (
         <div className="App">
             <p className={"text-5xl text-white font-black p-2 m-8"}>IMDb Movie Finder</p>
+            <p className={"text-white"}>This app is a simple movie detail finder for any movie that is in IMDb</p>
             <Search searchMovies={search} setSearchMovies={setSearch}/>
         </div>
     );

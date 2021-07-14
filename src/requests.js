@@ -12,22 +12,34 @@ const fetchApi = async (endpoint) => {
     }).catch(response => {
         console.log(response)
     });
-    console.log("API Response: ", api.status, api.statusText)
+    console.log("Fetching from API", endpoint)
     return api;
 }
 
-//TODO: Store movies by id in localstorage
-const fetchMoviesBySearch = (title) => {
-    return fetchApi(`https://imdb8.p.rapidapi.com/title/find?q=${title}`);
+export const fetchMoviesBySearch = (title) => {
+    return fetchFromLocalStorageOrSet(title, `https://imdb8.p.rapidapi.com/title/find?q=${title}`, "queries");
 }
 
-const fetchMoviePlot = (id) => {
-    return fetchApi(`https://imdb8.p.rapidapi.com/title/get-plots?tconst=${id}`);
+export const fetchMoviePlot = (id) => {
+    return fetchFromLocalStorageOrSet(id, `https://imdb8.p.rapidapi.com/title/get-plots?tconst=${id}`, "titles");
 }
 
-module.exports = {
-    fetchMoviesBySearch: fetchMoviesBySearch,
-    // fetchTopRatedMovies: fetchTopRatedMovies,
-    // fetchDetails: fetchDetails,
-    fetchMoviePlot: fetchMoviePlot
-};
+async function fetchFromLocalStorageOrSet(query, endpoint, localStorageKey) {
+    let entries = Object.entries(localStorage);
+    console.log(entries)
+    let queries = localStorage.getItem(localStorageKey);
+    // If there are no queries saved
+    if (!queries) {
+        localStorage.setItem(localStorageKey, JSON.stringify({}))
+    }
+    queries = localStorage.getItem(localStorageKey);
+    let jsonQueries = JSON.parse(queries);
+    //Get query from localStorage
+    if (jsonQueries[query] && Object.keys(jsonQueries[query]).length > 0) {
+        return jsonQueries[query];
+    }
+    // Fetch
+    jsonQueries[query] = await fetchApi(endpoint);
+    localStorage.setItem(localStorageKey, JSON.stringify(jsonQueries))
+    return jsonQueries[query];
+}
