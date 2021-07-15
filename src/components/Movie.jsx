@@ -17,7 +17,7 @@ const Movie = ({movie}) => {
             guardarCargando(true)
             setTimeout(async () => {
                 let promise = await fetchMoviePlot(id).then(r => r);
-                let text = promise.plots[0].text
+                let text = (promise.plots[0]) ? promise.plots[0].text : "No details found";
                 setMoviePlot(text);
                 guardarCargando(false);
             });
@@ -37,15 +37,15 @@ const Movie = ({movie}) => {
         <div
             className={"w-1/6 flex flex-col justify-between m-8 shadow-lg rounded-lg bg-gray-200 min-w-full md:min-w-max"}>
             {/*    Recieves the api info and loads picture info etc*/}
-            <img className={"rounded-t-lg max-h-96 max-w-xs"} src={movie.image.url} alt=""/>
+            <img className={"rounded-t-lg mx-auto max-h-96 max-w-xs"} src={movie.image.url} alt=""/>
             <p className={"mx-2 mt-2 font-bold"}>{movie.title}</p>
             {/*When details is clicked changes the card content to the plot*/}
 
             {cargando ? <Spinner/> : null}
 
-            {toggle ? !cargando && moviePlot && <p className={"text-left m-2 max-w-sm"}>{moviePlot}</p> : details}
+            {toggle ? !cargando && moviePlot && <p className={"m-2 max-w-sm"}>{moviePlot}</p> : details}
             <button
-                className={"font-bold bg-yellow-400 hover:bg-yellow-500 w-full h-10 rounded-b-lg w-full focus:ring-2 focus:ring-red-500 focus-inset"}
+                className={"font-bold bg-green-400 hover:bg-green-500 w-full h-10 rounded-b-lg w-full"}
                 onClick={() => {
                     setToggle(!toggle)
                     getMoviePlot(movie.id.split("/")[2]);

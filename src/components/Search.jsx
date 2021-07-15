@@ -26,14 +26,14 @@ const Search = ({searchMovies, setSearchMovies}) => {
 
     return (
         <div className={""}>
-            <p className={"text-xl font-bold m-6 text-white"}>Search movies</p>
+            <p className={"text-xl font-bold m-6"}>Search movies</p>
             <form onSubmit={fetchSearch}>
                 <input type="search" placeholder={"Search"}
-                       className="text-white border-2 focus:outline-none p-2 rounded-l-lg bg-gray-700 border-gray-300 w-1/2"
+                       className="text-gray-900 focus:outline-none p-2 rounded-l-lg bg-gray-100 border-gray-400 w-1/2 shadow-lg"
                        value={searchTerm}
                        onChange={handleChange}/>
                 <button type="submit"
-                        className="border-2 hover:bg-yellow-500 focus:outline-none p-2 rounded-r-lg bg-yellow-400 border-gray-300 font-bold">
+                        className="focus:outline-none p-2 rounded-r-lg bg-green-400 hover:bg-green-500 border-gray-400 font-bold text-gray-700 shadow-lg">
                     Search
                 </button>
             </form>
